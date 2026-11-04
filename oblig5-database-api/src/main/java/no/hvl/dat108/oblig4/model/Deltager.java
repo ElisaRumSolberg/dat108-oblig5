@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.Column;
+
 import java.util.Comparator;
 
 @Entity
@@ -20,6 +22,7 @@ public class Deltager {
     @Id
     private String mobil;
 
+    @Column(name = "passordhash")
     private String hashetPassord;
     private String fornavn;
     private String etternavn;
