@@ -10,7 +10,7 @@ public record DeltagerPostRequestDTO(
 
         @NotNull
         @Pattern(
-                regexp = "^\\d{8}$",
+                regexp = "^[0-9]{8}$",
                 message = Feilmeldinger.UGYLDIG_MOBIL_MLD
         )
         String mobil,
@@ -23,22 +23,32 @@ public record DeltagerPostRequestDTO(
         String passord,
 
         @NotNull
+        @Size(
+                min = 2,
+                max = 20,
+                message = Feilmeldinger.UGYLDIG_FORNAVN_MLD
+        )
         @Pattern(
-                regexp = "^[A-ZÆØÅ][\\p{L} -]{1,19}$",
+                regexp = "^[A-ZÆØÅ][a-zA-ZæøåÆØÅ -]{1,19}$",
                 message = Feilmeldinger.UGYLDIG_FORNAVN_MLD
         )
         String fornavn,
 
         @NotNull
+        @Size(
+                min = 2,
+                max = 20,
+                message = Feilmeldinger.UGYLDIG_ETTERNAVN_MLD
+        )
         @Pattern(
-                regexp = "^[A-ZÆØÅ][\\p{L}-]{1,19}$",
+                regexp = "^[A-ZÆØÅ][a-zA-ZæøåÆØÅ-]{1,19}$",
                 message = Feilmeldinger.UGYLDIG_ETTERNAVN_MLD
         )
         String etternavn,
 
         @NotNull
         @Pattern(
-                regexp = "^(mann|kvinne)$",
+                regexp = "mann|kvinne",
                 message = Feilmeldinger.UGYLDIG_KJONN_MLD
         )
         String kjonn
@@ -46,7 +56,6 @@ public record DeltagerPostRequestDTO(
 ) {
 
     public Deltager lagDeltager(String hashetPassord) {
-
         return new Deltager(
                 mobil,
                 hashetPassord,
