@@ -15,6 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class InnUtloggingController {
 
+    private final DeltagerDbService deltagerDbService;
+
+    public InnUtloggingController(DeltagerDbService deltagerDbService) {
+        this.deltagerDbService = deltagerDbService;
+    }
+
     @GetMapping("/innlogging")
     public String henteSkjema() {
         return "logginn";
@@ -28,7 +34,7 @@ public class InnUtloggingController {
             RedirectAttributes ra) {
 
         Deltager deltager =
-                DeltagerDbService.finnDeltagerMedMobil(mobil);
+                deltagerDbService.finnDeltagerMedMobil(mobil);
 
         if (deltager == null ||
                 !PassordService.erPassordKorrekt(

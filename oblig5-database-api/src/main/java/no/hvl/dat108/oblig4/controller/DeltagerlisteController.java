@@ -12,6 +12,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class DeltagerlisteController {
 
+    private final DeltagerDbService deltagerDbService;
+
+    public DeltagerlisteController(DeltagerDbService deltagerDbService) {
+        this.deltagerDbService = deltagerDbService;
+    }
+
     @GetMapping("/deltagerliste")
     public String henteDeltagerliste(
             HttpServletRequest request,
@@ -30,7 +36,7 @@ public class DeltagerlisteController {
 
         model.addAttribute(
                 "deltagere",
-                DeltagerDbService.finnAlleSortertPaaFulltNavn()
+                deltagerDbService.finnAlleSortertPaaFulltNavn()
         );
 
         return "deltagerliste";
