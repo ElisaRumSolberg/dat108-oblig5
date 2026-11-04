@@ -1,0 +1,79 @@
+### 1. GET alle deltagere - 200 OK
+GET http://localhost:8080/api/deltagere
+Api-Key: topsecret
+
+
+### 2. GET alle deltagere - 401 Unauthorized
+GET http://localhost:8080/api/deltagere
+Api-Key: feilnokkel
+
+
+### 3. GET én deltager - 200 OK
+GET http://localhost:8080/api/deltagere/12345678
+Api-Key: topsecret
+
+
+### 4. GET én deltager - 401 Unauthorized
+GET http://localhost:8080/api/deltagere/12345678
+Api-Key: feilnokkel
+
+
+### 5. GET én deltager - 404 Not Found
+GET http://localhost:8080/api/deltagere/99999999
+Api-Key: topsecret
+
+
+### 6. POST ny deltager - 201 Created
+POST http://localhost:8080/api/deltagere
+Api-Key: topsecret
+Content-Type: application/json
+
+{
+  "mobil": "87654321",
+  "passord": "abcd1234",
+  "fornavn": "Anna",
+  "etternavn": "Hansen",
+  "kjonn": "kvinne"
+}
+
+
+### 7. POST ny deltager - 401 Unauthorized
+POST http://localhost:8080/api/deltagere
+Api-Key: feilnokkel
+Content-Type: application/json
+
+{
+  "mobil": "87654322",
+  "passord": "abcd1234",
+  "fornavn": "Ola",
+  "etternavn": "Nordmann",
+  "kjonn": "mann"
+}
+
+
+### 8. POST ny deltager - 400 Bad Request
+POST http://localhost:8080/api/deltagere
+Api-Key: topsecret
+Content-Type: application/json
+
+{
+  "mobil": "123",
+  "passord": "a",
+  "fornavn": "a",
+  "etternavn": "b",
+  "kjonn": "annet"
+}
+
+
+### 9. POST ny deltager - 409 Conflict
+POST http://localhost:8080/api/deltagere
+Api-Key: topsecret
+Content-Type: application/json
+
+{
+  "mobil": "12345678",
+  "passord": "abcd1234",
+  "fornavn": "Elisa",
+  "etternavn": "Solberg",
+  "kjonn": "kvinne"
+}
